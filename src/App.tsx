@@ -8,6 +8,7 @@ import Alert from './components/Alert';
 import Weather from './components/Weather';
 import { setAlert } from './store/actions/alertActions';
 import { setError } from './store/actions/weatherActions';
+import { ThemeProvider, useTheme } from './components/ThemeContent';
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -31,17 +32,34 @@ const App: FC = () => {
      return greeting; 
   };
 
-  return (
-    <div className="has-text-centered">
-      <div> 
-        <h4>{Greetings()}</h4>
-      </div>
-      <Search title="Enter city name and press search button" />
-      {loading ? <h2 className="is-size-3 py-2">Loading...</h2> : weatherData && <Weather data={weatherData} />}
+  /*function AutoTheme(){
+    const currentTime = new Date();
+    const time = currentTime.getHours();
 
-      {alertMsg && <Alert message={alertMsg} onClose={() => dispatch(setAlert(''))} />}
-      {error && <Alert message={error} onClose={() => dispatch(setError())} />}
-    </div>
+      if(time < 18 || time < 7 ){
+          return(name == "dark");
+      }
+      else {
+          return(name == "light");
+      }
+  }*/
+
+const Page = () => {
+  return (
+     <div className="has-text-centered"> 
+       <h4 className="gr">{Greetings()}</h4>
+     <Search title="Enter city name and press search button" />
+     {loading ? <h2 className="is-size-3 py-2">Loading...</h2> : weatherData && <Weather data={weatherData} />}
+     {alertMsg && <Alert message={alertMsg} onClose={() => dispatch(setAlert(''))} />}
+     {error && <Alert message={error} onClose={() => dispatch(setError())} />}
+   </div>
+  );
+};
+
+  return (
+    <ThemeProvider>
+      <Page />
+    </ThemeProvider>
   );
 }
 

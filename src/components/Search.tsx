@@ -1,5 +1,6 @@
 import React, { FC, useState, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
+import {useTheme} from './ThemeContent';
 
 import { setAlert } from '../store/actions/alertActions';
 import { getWeather, setLoading } from '../store/actions/weatherActions';
@@ -11,6 +12,7 @@ interface SearchProps {
 const Search: FC<SearchProps> = ({ title }) => {
   const dispatch = useDispatch();
   const [city, setCity] = useState('');
+  const { theme, setTheme } = useTheme();
 
   const changeHandler = (e: FormEvent<HTMLInputElement>) => {
     setCity(e.currentTarget.value);
@@ -30,9 +32,10 @@ const Search: FC<SearchProps> = ({ title }) => {
 
   return(
     <div className="hero is-light has-text-centered">
+       
       <div className="hero-body">
         <div className="container">
-          <h1 className="title">{title}</h1>
+          <h1 className="tit">{title}</h1>
           <form className="py-5" onSubmit={submitHandler}>
             <input 
               type="text"
@@ -45,6 +48,11 @@ const Search: FC<SearchProps> = ({ title }) => {
             <button className="button is-primary is-fullwidth" style={{maxWidth: 300, margin: '0 auto'}}>Search</button>
           </form>
         </div>
+      </div>
+      <div className='foo'>
+      <button className = "btn" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+        {theme === "dark" ? "light" : "dark"}
+        </button>
       </div>
     </div>
   );  

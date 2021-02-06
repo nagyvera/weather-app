@@ -6,8 +6,8 @@ interface WeatherProps {
 }
 
 const Weather: FC<WeatherProps> = ({ data }) => {
-  const celsius = (data.main.temp - 273.15).toFixed(2);
-  const realfeel_celsius = (data.main.feels_like - 273.15).toFixed(2);
+  const celsius = (data.main.temp - 273.15).toFixed(0);
+  const realfeel_celsius = (data.main.feels_like - 273.15).toFixed(0);
 
   return(
     <section className="section">

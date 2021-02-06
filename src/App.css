@@ -1,3 +1,32 @@
 .level .level-item {
-  margin-bottom: 50px !important;
+  margin-bottom: 50px;
+}
+
+:root {
+  --background-color: #fefefe;
+  --color: #343434;
+}
+
+body, .hero-body, .container, p, p.title, h1.has-text-centered, .foo, .gr, .tit, button  {
+  background-color: var(--background-color);
+  color: var(--color);
+  transition: background-color 1000ms linear;
+  transition: color 1000ms linear;
+}
+
+.foo{
+  display: inline-block;
+  top: 2px;
+  position: absolute;
+  padding: 5px;
+}
+
+.gr{
+  height: 60px;
+  padding: 10px;
+  font-style: italic;
+}
+
+.btn{
+  border: none;
 }
