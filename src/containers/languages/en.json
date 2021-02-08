@@ -1,0 +1,8 @@
+
+{
+    "newLanguage":"en",
+    "title": "Enter city name and press search button",
+    "btn": "Search",
+    "warning": "City is required!",
+    "enterText": "Please enter your City!"
+}

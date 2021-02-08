@@ -16,17 +16,51 @@ body, .hero-body, .container, p, p.title, h1.has-text-centered, .foo, .gr, .tit,
 
 .foo{
   display: inline-block;
-  top: 2px;
+  top: 5px;
   position: absolute;
-  padding: 5px;
+  padding: 3px;
 }
 
 .gr{
   height: 60px;
-  padding: 10px;
+  margin-top: 10px;
+  margin-left: 60px;
   font-style: italic;
 }
 
 .btn{
   border: none;
 }
+/* Header */
+
+.header {
+  padding: 5px;
+  float: right
+}
+      .selected {
+        width: 50px;
+        background-color: #00d1b2;
+        color: #fff;
+        padding: 5px;
+        font-weight: 700;
+        font-size: 12px;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+
+      .dropdown {
+        position: relative;
+        top: calc(100% + 5px);
+        left: 0;
+        width: 100%;
+        border-radius: 2px;
+        padding: 5px 0;
+        box-shadow: 0 0 10px rgba(#000, 0.2);
+      }
+
+        li {
+          text-align: center;
+          font-size: 12px;
+          padding: 5px;
+          cursor: pointer;
+        }

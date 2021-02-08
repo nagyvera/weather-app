@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent } from 'react';
+import React, { FC, useState, FormEvent, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import {useTheme} from './ThemeContent';
 
@@ -6,10 +6,10 @@ import { setAlert } from '../store/actions/alertActions';
 import { getWeather, setLoading } from '../store/actions/weatherActions';
 
 interface SearchProps {
-  title: string;
+  translate: (key: string) => string;
 }
 
-const Search: FC<SearchProps> = ({ title }) => {
+const Search: FC<SearchProps> = ({translate}) => {
   const dispatch = useDispatch();
   const [city, setCity] = useState('');
   const { theme, setTheme } = useTheme();
@@ -22,7 +22,7 @@ const Search: FC<SearchProps> = ({ title }) => {
     e.preventDefault();
 
     if(city.trim() === '') {
-      return dispatch(setAlert('City is required!'));
+      return dispatch(setAlert("City is required!"));
     }
 
     dispatch(setLoading());
@@ -32,27 +32,26 @@ const Search: FC<SearchProps> = ({ title }) => {
 
   return(
     <div className="hero is-light has-text-centered">
-       
       <div className="hero-body">
         <div className="container">
-          <h1 className="tit">{title}</h1>
+          <h1 className="tit">{translate('title')}</h1>
           <form className="py-5" onSubmit={submitHandler}>
             <input 
               type="text"
               className="input has-text-centered mb-2"
-              placeholder="City name here!"
+              placeholder={translate('enterText')}
               style={{maxWidth: 300}}
               value={city}
               onChange={changeHandler}
             />
-            <button className="button is-primary is-fullwidth" style={{maxWidth: 300, margin: '0 auto'}}>Search</button>
+            <button className="button is-primary is-fullwidth" style={{maxWidth: 300, margin: '0 auto'}}>{translate('btn')}</button>
           </form>
         </div>
       </div>
       <div className='foo'>
       <button className = "btn" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
         {theme === "dark" ? "light" : "dark"}
-        </button>
+        </button>  
       </div>
     </div>
   );  

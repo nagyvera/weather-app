@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 
@@ -8,7 +8,10 @@ import Alert from './components/Alert';
 import Weather from './components/Weather';
 import { setAlert } from './store/actions/alertActions';
 import { setError } from './store/actions/weatherActions';
+
 import { ThemeProvider, useTheme } from './components/ThemeContent';
+import {LangContext} from './components/Lang';
+import Header from './components/Header';
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -16,6 +19,17 @@ const App: FC = () => {
   const loading = useSelector((state: RootState) => state.weather.loading);
   const error = useSelector((state: RootState) => state.weather.error);
   const alertMsg = useSelector((state: RootState) => state.alert.message);
+  const { dispatch: { translate }} = useContext(LangContext);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(function(position) {
+        var lon = position.coords.longitude;
+        var lat = position.coords.latitude;
+        console.log(`longitude: ${ lon } | latitude: ${ lat }`);
+      });
+    }
+  })
 
   function Greetings(){
     let greeting: string;
@@ -23,7 +37,7 @@ const App: FC = () => {
     const time = currentTime.getHours();
     
     if (time < 12) {
-      greeting = "Good morning!";
+       greeting = "Good morning!";
     } else if (time < 18) {
       greeting = "Have a good day!";
     } else {
@@ -47,8 +61,11 @@ const App: FC = () => {
 const Page = () => {
   return (
      <div className="has-text-centered"> 
-       <h4 className="gr">{Greetings()}</h4>
-     <Search title="Enter city name and press search button" />
+     <Header />
+      <h4 className="gr">{Greetings()}</h4>
+      <div className="location">
+      </div>
+     <Search translate={translate}/>
      {loading ? <h2 className="is-size-3 py-2">Loading...</h2> : weatherData && <Weather data={weatherData} />}
      {alertMsg && <Alert message={alertMsg} onClose={() => dispatch(setAlert(''))} />}
      {error && <Alert message={error} onClose={() => dispatch(setError())} />}
@@ -57,9 +74,9 @@ const Page = () => {
 };
 
   return (
-    <ThemeProvider>
-      <Page />
-    </ThemeProvider>
+      <ThemeProvider>
+        <Page />
+      </ThemeProvider>
   );
 }
 
