@@ -20,8 +20,10 @@ const ThemeContext = React.createContext<ThemeContextType>(undefined!);
 
 type Props = {
   children: React.ReactNode;
+  themeCode: string;
 };
-export const ThemeProvider = ({ children }: Props) => {
+
+export const ThemeProvider = ({ children, themeCode }: Props) => {
   const [themeName, setThemeName] = React.useState<ThemeName>("light");
 
   React.useEffect(() => {

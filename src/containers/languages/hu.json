@@ -3,8 +3,7 @@
     "newLanguage":"hu",
     "title": "Add meg a város nevet és nyomd meg a keresés gombot",
     "btn": "Keresés",
+    "Locbtn": "Helymeghatározás",
     "warning": "Kötelező megadni Várost!",
-    "enterText": "Add meg a Városod!",
-    "longitudeText": "hosszuság",
-    "latitudeText": "szélesség" 
+    "enterText": "Add meg a Városod!"
 }

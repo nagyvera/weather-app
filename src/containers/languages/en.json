@@ -3,8 +3,7 @@
     "newLanguage":"en",
     "title": "Enter city name and press search button",
     "btn": "Search",
+    "Locbtn": "Search by your position",
     "warning": "City is required!",
-    "enterText": "Please enter your City!",
-    "longitudeText": "Longitude",
-    "latitudeText": "Latitude" 
+    "enterText": "Please enter your City!"
 }

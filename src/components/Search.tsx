@@ -16,14 +16,6 @@ const Search: FC<SearchProps> = ({translate}) => {
   const [lon, setLon] = useState();
   const { theme, setTheme } = useTheme();
 
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(function(position) {
-        var lon = position.coords.longitude;
-        var lat = position.coords.latitude;
-        console.log(`longitude: ${ lon } | latitude: ${ lat }`);
-      });
-    }
-
   const changeCityHandler = (e: FormEvent<HTMLInputElement>) => {
     setCity(e.currentTarget.value);
   }
@@ -48,7 +40,13 @@ const Search: FC<SearchProps> = ({translate}) => {
   const coordHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setLoading());
-    dispatch(getWeatherByCoord(lat, lon));
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(function(position) {
+        const lon = position.coords.longitude;
+        const lat = position.coords.latitude;
+        dispatch(getWeatherByCoord(lat, lon));
+      });
+    }
   }
 
   return(
@@ -68,23 +66,7 @@ const Search: FC<SearchProps> = ({translate}) => {
             <button className="button is-primary is-fullwidth" style={{maxWidth: 300, margin: '0 auto'}}>{translate('btn')}</button>
           </form>
           <form className="py-5" onSubmit={coordHandler}>
-            <input 
-              type="number"
-              className="input has-text-centered mb-2"
-              placeholder={translate('latitudeText')}
-              style={{maxWidth: 150}}
-              value={lat}
-              onChange={changeLatHandler}
-            />
-            <input 
-              type="number"
-              className="input has-text-centered mb-2"
-              placeholder={translate('longitudeText')}
-              style={{maxWidth: 150}}
-              value={lon}
-              onChange={changeLonHandler}
-            />
-            <button className="button is-primary is-fullwidth" style={{maxWidth: 300, margin: '0 auto'}}>{translate('btn')}</button>
+            <button className="button is-primary is-fullwidth" style={{maxWidth: 300, margin: '0 auto'}}>{translate('Locbtn')}</button>
           </form>
         </div>
       </div>
