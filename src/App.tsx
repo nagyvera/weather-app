@@ -21,16 +21,6 @@ const App: FC = () => {
   const alertMsg = useSelector((state: RootState) => state.alert.message);
   const { dispatch: { translate }} = useContext(LangContext);
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(function(position) {
-        var lon = position.coords.longitude;
-        var lat = position.coords.latitude;
-        console.log(`longitude: ${ lon } | latitude: ${ lat }`);
-      });
-    }
-  })
-
   function Greetings(){
     let greeting: string;
     const currentTime = new Date();

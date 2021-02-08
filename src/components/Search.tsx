@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import {useTheme} from './ThemeContent';
 
 import { setAlert } from '../store/actions/alertActions';
-import { getWeather, setLoading } from '../store/actions/weatherActions';
+import { getWeatherByCity, getWeatherByCoord, setLoading } from '../store/actions/weatherActions';
 
 interface SearchProps {
   translate: (key: string) => string;
@@ -12,17 +12,29 @@ interface SearchProps {
 const Search: FC<SearchProps> = ({translate}) => {
   const dispatch = useDispatch();
   const [city, setCity] = useState('');
-  // const [lat, setLat] = useState();
-  // const [lon, setLon] = useState();
+  const [lat, setLat] = useState();
+  const [lon, setLon] = useState();
   const { theme, setTheme } = useTheme();
 
-  const changeHandler = (e: FormEvent<HTMLInputElement>) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(function(position) {
+        var lon = position.coords.longitude;
+        var lat = position.coords.latitude;
+        console.log(`longitude: ${ lon } | latitude: ${ lat }`);
+      });
+    }
+
+  const changeCityHandler = (e: FormEvent<HTMLInputElement>) => {
     setCity(e.currentTarget.value);
-    // setLat(e.currentTarget.value);
-    // setLon(e.currentTarget.value);
+  }
+  const changeLatHandler = (e: FormEvent<HTMLInputElement>) => {
+    setLat(e.currentTarget.value);
+  }
+  const changeLonHandler = (e: FormEvent<HTMLInputElement>) => {
+    setLon(e.currentTarget.value);
   }
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const cityHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if(city.trim() === '') {
@@ -30,8 +42,13 @@ const Search: FC<SearchProps> = ({translate}) => {
     }
 
     dispatch(setLoading());
-    dispatch(getWeather(city));
-    setCity('');
+    dispatch(getWeatherByCity(city));
+  }
+
+  const coordHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(setLoading());
+    dispatch(getWeatherByCoord(lat, lon));
   }
 
   return(
@@ -39,14 +56,33 @@ const Search: FC<SearchProps> = ({translate}) => {
       <div className="hero-body">
         <div className="container">
           <h1 className="tit">{translate('title')}</h1>
-          <form className="py-5" onSubmit={submitHandler}>
+          <form className="py-5" onSubmit={cityHandler}>
             <input 
               type="text"
               className="input has-text-centered mb-2"
               placeholder={translate('enterText')}
               style={{maxWidth: 300}}
               value={city}
-              onChange={changeHandler}
+              onChange={changeCityHandler}
+            />
+            <button className="button is-primary is-fullwidth" style={{maxWidth: 300, margin: '0 auto'}}>{translate('btn')}</button>
+          </form>
+          <form className="py-5" onSubmit={coordHandler}>
+            <input 
+              type="number"
+              className="input has-text-centered mb-2"
+              placeholder={translate('latitudeText')}
+              style={{maxWidth: 150}}
+              value={lat}
+              onChange={changeLatHandler}
+            />
+            <input 
+              type="number"
+              className="input has-text-centered mb-2"
+              placeholder={translate('longitudeText')}
+              style={{maxWidth: 150}}
+              value={lon}
+              onChange={changeLonHandler}
             />
             <button className="button is-primary is-fullwidth" style={{maxWidth: 300, margin: '0 auto'}}>{translate('btn')}</button>
           </form>
