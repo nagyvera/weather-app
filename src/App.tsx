@@ -63,8 +63,6 @@ const Page = () => {
      <div className="has-text-centered"> 
      <Header />
       <h4 className="gr">{Greetings()}</h4>
-      <div className="location">
-      </div>
      <Search translate={translate}/>
      {loading ? <h2 className="is-size-3 py-2">Loading...</h2> : weatherData && <Weather data={weatherData} />}
      {alertMsg && <Alert message={alertMsg} onClose={() => dispatch(setAlert(''))} />}

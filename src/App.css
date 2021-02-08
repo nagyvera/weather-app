@@ -16,9 +16,9 @@ body, .hero-body, .container, p, p.title, h1.has-text-centered, .foo, .gr, .tit,
 
 .foo{
   display: inline-block;
-  top: 5px;
+  top: 10px;
   position: absolute;
-  padding: 3px;
+  padding: 2px;
 }
 
 .gr{
