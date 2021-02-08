@@ -12,10 +12,14 @@ interface SearchProps {
 const Search: FC<SearchProps> = ({translate}) => {
   const dispatch = useDispatch();
   const [city, setCity] = useState('');
+  // const [lat, setLat] = useState();
+  // const [lon, setLon] = useState();
   const { theme, setTheme } = useTheme();
 
   const changeHandler = (e: FormEvent<HTMLInputElement>) => {
     setCity(e.currentTarget.value);
+    // setLat(e.currentTarget.value);
+    // setLon(e.currentTarget.value);
   }
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {

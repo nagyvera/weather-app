@@ -23,7 +23,6 @@ body, .hero-body, .container, p, p.title, h1.has-text-centered, .foo, .gr, .tit,
 
 .gr{
   height: 60px;
-  margin-top: 10px;
   margin-left: 60px;
   font-style: italic;
 }
