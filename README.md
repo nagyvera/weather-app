@@ -6,3 +6,7 @@
 # auto d-l m: 1 óra, részleges eredmény
 # en/hu: 1,5 óra
 # debug: 4 óra
+
+# ----------------------------------------------------------------------
+
+# javítás után a nem megfelelő API-kulcsról és nem létező városról szóló hibaüzenet nem módosult, mert azt visszakapom, nem én írtam.
