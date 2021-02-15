@@ -1,9 +1,14 @@
 
 {
-    "newLanguage":"en",
-    "title": "Enter city name and press search button",
+    "title": "Enter your API-key, city name and press search button",
+    "API": "Please enter your API-key",
     "btn": "Search",
     "Locbtn": "Search by your position",
-    "warning": "City is required!",
-    "enterText": "Please enter your City!"
+    "warning": "The City and the API Key is required too!",
+    "APImissing": "The API key is missing!",
+    "enterText": "Please enter your City!",
+    "morning":"Good morning!",
+    "day": "Have a nice day!",
+    "night": "Good evening!",
+    "close": "Close"
 }

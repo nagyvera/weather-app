@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 
@@ -9,7 +9,7 @@ import Weather from './components/Weather';
 import { setAlert } from './store/actions/alertActions';
 import { setError } from './store/actions/weatherActions';
 
-import { ThemeProvider, useTheme } from './components/ThemeContent';
+import { ThemeProvider } from './components/ThemeContent';
 import { LangContext } from './components/Lang';
 import Header from './components/Header';
 
@@ -27,11 +27,11 @@ const App: FC = () => {
     const time = currentTime.getHours();
 
     if (time < 12) {
-      greeting = "Good morning!";
+      greeting = translate('morning');
     } else if (time < 18) {
-      greeting = "Have a good day!";
+      greeting = translate('day');
     } else {
-      greeting = "Good evening!";
+      greeting = translate('night');
     }
     return greeting;
   };
@@ -57,7 +57,7 @@ const App: FC = () => {
         <h4 className="gr">{Greetings()}</h4>
         <Search translate={translate} />
         {loading ? <h2 className="is-size-3 py-2">Loading...</h2> : weatherData && <Weather data={weatherData} />}
-        {alertMsg && <Alert message={alertMsg} onClose={() => dispatch(setAlert(''))} />}
+        {alertMsg && <Alert message={alertMsg} onClose={() => dispatch(setAlert(''))} />} 
         {error && <Alert message={error} onClose={() => dispatch(setError())} />}
       </div>
     );

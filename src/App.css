@@ -3,7 +3,7 @@
 }
 
 :root {
-  --background-color: #fefefe;
+  --background-color: #f2fff7;
   --color: #343434;
 }
 
@@ -15,10 +15,8 @@ body, .hero-body, .container, p, p.title, h1.has-text-centered, .foo, .gr, .tit,
 }
 
 .foo{
-  display: inline-block;
-  top: 10px;
-  position: absolute;
-  padding: 2px;
+  padding: 5px;
+  float: left;
 }
 
 .gr{
@@ -30,36 +28,8 @@ body, .hero-body, .container, p, p.title, h1.has-text-centered, .foo, .gr, .tit,
 .btn{
   border: none;
 }
-/* Header */
 
-.header {
+.header__nav_lang {
   padding: 5px;
   float: right
 }
-      .selected {
-        width: 50px;
-        background-color: #00d1b2;
-        color: #fff;
-        padding: 5px;
-        font-weight: 700;
-        font-size: 12px;
-        border-radius: 2px;
-        cursor: pointer;
-      }
-
-      .dropdown {
-        position: relative;
-        top: calc(100% + 5px);
-        left: 0;
-        width: 100%;
-        border-radius: 2px;
-        padding: 5px 0;
-        box-shadow: 0 0 10px rgba(#000, 0.2);
-      }
-
-        li {
-          text-align: center;
-          font-size: 12px;
-          padding: 5px;
-          cursor: pointer;
-        }

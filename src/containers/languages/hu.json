@@ -1,9 +1,14 @@
 
 {
-    "newLanguage":"hu",
-    "title": "Add meg a város nevet és nyomd meg a keresés gombot",
+    "title": "Add meg az API kulcsot, a város nevet és nyomd meg a keresés gombot",
+    "API": "Add meg az API-kulcsod!",
     "btn": "Keresés",
     "Locbtn": "Helymeghatározás",
-    "warning": "Kötelező megadni Várost!",
-    "enterText": "Add meg a Városod!"
+    "warning":"Kötelező megadni a Várost és az API kulcsot is!",
+    "APImissing": "Az API kulcs hiányzik!",
+    "enterText": "Add meg a Városod!",
+    "morning":"Jó reggelt!",
+    "day": "Szép napot!",
+    "night": "Jó estét!",  
+    "close": "Bezárás"
 }

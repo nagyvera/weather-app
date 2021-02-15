@@ -1,6 +1,5 @@
-import React, { FC, useState, FormEvent, useContext } from 'react';
+import React, { FC, useState, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import {useTheme} from './ThemeContent';
 
 import { setAlert } from '../store/actions/alertActions';
 import { getWeatherByCity, getWeatherByCoord, setLoading } from '../store/actions/weatherActions';
@@ -12,40 +11,38 @@ interface SearchProps {
 const Search: FC<SearchProps> = ({translate}) => {
   const dispatch = useDispatch();
   const [city, setCity] = useState('');
-  const [lat, setLat] = useState();
-  const [lon, setLon] = useState();
-  const { theme, setTheme } = useTheme();
+  const [API_KEY, setAPI] = useState('');
 
   const changeCityHandler = (e: FormEvent<HTMLInputElement>) => {
     setCity(e.currentTarget.value);
   }
-  const changeLatHandler = (e: FormEvent<HTMLInputElement>) => {
-    setLat(e.currentTarget.value);
-  }
-  const changeLonHandler = (e: FormEvent<HTMLInputElement>) => {
-    setLon(e.currentTarget.value);
+  const changeAPIHandler = (e: FormEvent<HTMLInputElement>) => {
+    setAPI(e.currentTarget.value);
   }
 
   const cityHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if(city.trim() === '') {
-      return dispatch(setAlert("City is required!"));
+    if(API_KEY.trim() === '' || city.trim() === ''){
+      return dispatch(setAlert(translate('warning')))
     }
 
     dispatch(setLoading());
-    dispatch(getWeatherByCity(city));
+    dispatch(getWeatherByCity(API_KEY, city));
   }
 
   const coordHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(setLoading());
+    if(API_KEY.trim() === ''){
+      return dispatch(setAlert(translate('APImissing')))
+    }
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(function(position) {
+      navigator.geolocation.getCurrentPosition(function(position) {
         const lon = position.coords.longitude;
         const lat = position.coords.latitude;
-        dispatch(getWeatherByCoord(lat, lon));
+        dispatch(getWeatherByCoord(API_KEY, lat, lon));
       });
+      e.preventDefault();
+      dispatch(setLoading());
     }
   }
 
@@ -54,7 +51,15 @@ const Search: FC<SearchProps> = ({translate}) => {
       <div className="hero-body">
         <div className="container">
           <h1 className="tit">{translate('title')}</h1>
-          <form className="py-5" onSubmit={cityHandler}>
+          <form className="py-1" onSubmit={cityHandler}>
+          <input 
+              type="text"
+              className="input has-text-centered mb-2"
+              placeholder={translate('API')}
+              style={{maxWidth: 300}}
+              value={API_KEY}
+              onChange={changeAPIHandler}
+            />
             <input 
               type="text"
               className="input has-text-centered mb-2"
@@ -69,11 +74,6 @@ const Search: FC<SearchProps> = ({translate}) => {
             <button className="button is-primary is-fullwidth" style={{maxWidth: 300, margin: '0 auto'}}>{translate('Locbtn')}</button>
           </form>
         </div>
-      </div>
-      <div className='foo'>
-      <button className = "btn" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-        {theme === "dark" ? "light" : "dark"}
-        </button>  
       </div>
     </div>
   );  

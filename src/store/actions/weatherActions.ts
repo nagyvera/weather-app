@@ -1,10 +1,10 @@
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '..';
-import { GET_WEATHER, SET_ERROR, SET_LOADING, WeatherAction, WeatherData, WeatherError } from '../types';
+import { GET_WEATHER, SET_ERROR, SET_LOADING, WeatherAction} from '../types';
 
-export const getWeatherByCity = (city: string): ThunkAction<void, RootState, null, WeatherAction> => {
+export const getWeatherByCity = (API_KEY:string, city: string): ThunkAction<void, RootState, null, WeatherAction> => {
   return async dispatch => {
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`);
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`);
     const resData = await res.json();
     if (res.ok) {
       dispatch({ type: GET_WEATHER, payload: resData });
@@ -14,9 +14,9 @@ export const getWeatherByCity = (city: string): ThunkAction<void, RootState, nul
   }
 }
 
-export const getWeatherByCoord = (lat: number, lon: number): ThunkAction<void, RootState, null, WeatherAction> => {
+export const getWeatherByCoord = (API_KEY:string, lat: number, lon: number): ThunkAction<void, RootState, null, WeatherAction> => {
   return async dispatch => {
-    var res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}`);
+    var res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
     const resData = await res.json();
     if (res.ok) {
       dispatch({ type: GET_WEATHER, payload: resData });

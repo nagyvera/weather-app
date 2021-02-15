@@ -3,7 +3,7 @@ import React from "react";
 const themeColours = {
   light: {
     color: "#000000",
-    backgroundColor: "#fefefe"
+    backgroundColor: "#f2fff7"
   },
   dark: {
     color: "#fff",
